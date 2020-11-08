@@ -1,10 +1,22 @@
 <?php
 include_once 'inc/db.php';
 include_once 'inc/header.php';
+
+$sql = "select * from corvettes order by Body_Style";
+$result = $pdo->query($sql);
+
+function get_state($state_id)
+{
+    global $pdo;
+    $sql = "select * from states where State_id={$state_id}";
+    $result = $pdo->query($sql);
+    return $result->fetch();
+}
+
 ?>
 
 
-<table style="width:100%">
+<table style="width:50%">
     <tr>
         <th>#id</th>
         <th>Body Style</th>
@@ -14,23 +26,27 @@ include_once 'inc/header.php';
         <th>Edit</th>
         <th>Delete</th>
     </tr>
-    <tr>
-        <td>1</td>
-        <td>Sleek</td>
-        <td>50</td>
-        <td>2000</td>
-        <td>MI</td>
-        <td>
-            <form method="get" action="edit.php?id=<?php echo 1  ?>">
-                <button type="submit">UPDATE</button>
-            </form>
-        </td>
-        <td>
-            <form method="get" action="delete.php?id=<?php echo 1 ?>">
-                <button type="submit">DELETE</button>
-            </form>
-        </td>
-    </tr>
+    <?php while ($row = $result->fetch()) : ?>
+        <tr>
+            <td><?php echo $row['Vette_id'] ?></td>
+            <td><?php echo $row['Body_Style'] ?></td>
+            <td><?php echo $row['Miles'] ?></td>
+            <td><?php echo $row['Year'] ?></td>
+            <td><?php echo get_state($row['State'])['State'] ?></td>
+            <td>
+                <a href="edit.php?id=<?php echo $row['Vette_id'] ?>">UPDATE</a>
+                <!-- <form method="get" action="edit.php?id=<?php echo $row['Vette_id'] ?>">
+                    <button type="submit">UPDATE</button>
+                </form> -->
+            </td>
+            <td>
+                <a href="delete.php?id=<?php echo $row['Vette_id'] ?>">DELETE</a>
+                <!-- <form method="get" action="delete.php?id=<?php echo $row['Vette_id'] ?>">
+                    <button type="submit">DELETE</button>
+                </form> -->
+            </td>
+        </tr>
+    <?php endwhile ?>
 </table>
 
 
