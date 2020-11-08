@@ -15,7 +15,7 @@ function get_state($state_id)
 
 ?>
 
-
+<a href="create.php">CREATE NEW</a>
 <table style="width:50%">
     <tr>
         <th>#id</th>
