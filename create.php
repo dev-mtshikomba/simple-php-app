@@ -6,8 +6,15 @@ if (isset($_POST['create']) && $_POST['create'] != null) :
     $sql = "INSERT INTO `corvettes` (`Body_Style`, `Miles`, `Year`, `State`) VALUES ('{$_POST['Body_Style']}', '{$_POST['Miles']}', '{$_POST['Year']}', '1')";
     $result = $pdo->query($sql);
     header("Location: index.php");
-endif
+endif;
 
+function get_states()
+{
+    global $pdo;
+    $sql = "SELECT * FROM `states`";
+
+    return $pdo->query($sql);
+}
 ?>
 
 <form action="create.php" method="post">
@@ -21,7 +28,12 @@ endif
     Year: <input type="input" name="Year">
     <br>
     <br>
-    State: <input type="input" name="State">
+    State: 
+    <select name="State">
+        <?php $result = get_states(); while ($row = $result->fetch()) : ?>
+            <option value="<?php echo $row['State_id'] ?>"> <?php echo $row['State'] ?> </option>
+        <?php endwhile; ?>
+    </select>
     <br>
     <br>
     <button type="submit">CREATE RECORD</button>
