@@ -15,7 +15,8 @@ function get_state($state_id)
 
 ?>
 
-<a href="create.php">CREATE NEW</a>
+<a href="create.php"> CREATE NEW |</a>
+<!-- <form method="get" action="index.php" href=""><input type="text" value="SORT"></form> -->
 <table style="width:50%">
     <tr>
         <th>#id</th>

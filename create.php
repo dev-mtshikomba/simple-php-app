@@ -7,14 +7,6 @@ if (isset($_POST['create']) && $_POST['create'] != null) :
     $result = $pdo->query($sql);
     header("Location: index.php");
 endif;
-
-function get_states()
-{
-    global $pdo;
-    $sql = "SELECT * FROM `states`";
-
-    return $pdo->query($sql);
-}
 ?>
 
 <form action="create.php" method="post">
@@ -28,15 +20,26 @@ function get_states()
     Year: <input type="input" name="Year">
     <br>
     <br>
-    State: 
+    State:
     <select name="State">
-        <?php $result = get_states(); while ($row = $result->fetch()) : ?>
+        <?php $result = get_states();
+        while ($row = $result->fetch()) : ?>
             <option value="<?php echo $row['State_id'] ?>"> <?php echo $row['State'] ?> </option>
         <?php endwhile; ?>
     </select>
     <br>
     <br>
+    Equipment:
+    <?php $result = get_equipments();
+    while ($row = $result->fetch()) : ?>
+        <input type="checkbox" name="Equip_id" id="<?php echo $row["Equip_id"] ?>"> <?php echo $row["Equip"] ?>
+    <?php endwhile; ?>
+    <br>
+    <br>
     <button type="submit">CREATE RECORD</button>
+    <br>
+    <br>
+    <a href="index.php"><< HOME</a>
 </form>
 
 <?php

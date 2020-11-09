@@ -22,7 +22,7 @@ elseif (isset($_POST['update'])) :
     // var_dump($result);
     header("Location: edit.php?id={$id}");
 else :
-// just redirect to index.php
+    // just redirect to index.php
     header("Location: index.php");
 endif
 
@@ -39,13 +39,25 @@ endif
     Year: <input type="input" name="Year" value="<?php echo $data['Year'] ?>">
     <br>
     <br>
-    State: <input type="input" name="State" value="<?php echo $data['State'] ?>">
+    State:
+    <select name="State">
+        <?php $result = get_states();
+        while ($row = $result->fetch()) : ?>
+            <option <?php $data['State'] == $row['State'] ? 'selected' : '' ?> value="<?php echo $row['State_id'] ?>"> <?php echo $row['State'] ?> </option>
+        <?php endwhile; ?>
+    </select>
+    <br>
+    <br>
+    Equipment:
+    <?php $result = get_equipments();
+    while ($row = $result->fetch()) : ?>
+        <input type="checkbox" name="Equip_id" id="<?php echo $row["Equip_id"] ?>"> <?php echo $row["Equip"] ?>
+    <?php endwhile; ?>
     <br>
     <br>
     <button type="submit">UPDATE RECORD</button>
 </form>
-<a href="index.php"><< HOME </a>
-
-<?php
-require_once 'inc/footer.php';
-?>
+<a href="index.php">
+    << HOME </a> <?php
+                    require_once 'inc/footer.php';
+                    ?>
