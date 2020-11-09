@@ -25,8 +25,21 @@ endif;
 
 ?>
 
-<a href="create.php"> CREATE NEW |</a>
-<!-- <form method="get" action="index.php" href=""><input type="text" value="SORT"></form> -->
+<a style="display: inline;" href="create.php"> CREATE NEW</a><span>
+    <|>
+</span>
+<form style="display: inline;" action="index.php" method="get">
+    Sort by:
+    <select name="sort_by">
+
+        <option value="Miles">Miles</option>
+        <option value="Year">Year</option>
+        <option value="State">State</option>
+
+    </select>
+
+    <button type="submit">Sort</button>
+</form>
 <table style="width:50%">
     <tr>
         <th>#id</th>
@@ -59,20 +72,7 @@ endif;
         </tr>
     <?php endwhile ?>
 </table>
-<br>
-<br>
-<form action="index.php" method="get">
-    Sort by:
-    <select name="sort_by">
 
-        <option value="Miles">Miles</option>
-        <option value="Year">Year</option>
-        <option value="State">State</option>
-
-    </select>
-
-    <button type="submit">Sort</button>
-</form>
 <?php
 include_once 'inc/footer.php'
 ?>
