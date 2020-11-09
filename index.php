@@ -9,14 +9,6 @@ function get_inventory($sort_by = 'Body_Style')
     return $pdo->query($sql);
 }
 
-function get_state($state_id)
-{
-    global $pdo;
-    $sql = "select * from states where State_id={$state_id}";
-    $result = $pdo->query($sql);
-    return $result->fetch();
-}
-
 if (isset($_GET['sort_by']) && $_GET['sort_by'] != null) :
     $result = get_inventory($sort_by = $_GET['sort_by']);
 else :
@@ -40,6 +32,8 @@ endif;
 
     <button type="submit">Sort</button>
 </form>
+<|>
+<a style="display: inline;" href="equip_inventory.php">EQUIP INVENETORY</a><span>
 <table style="width:50%">
     <tr>
         <th>#id</th>
