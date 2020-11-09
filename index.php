@@ -2,8 +2,12 @@
 include_once 'inc/db.php';
 include_once 'inc/header.php';
 
-$sql = "select * from corvettes order by Body_Style";
-$result = $pdo->query($sql);
+function get_inventory($sort_by = 'Body_Style')
+{
+    global $pdo;
+    $sql = "select * from corvettes order by `{$sort_by}`";
+    return $pdo->query($sql);
+}
 
 function get_state($state_id)
 {
@@ -12,6 +16,12 @@ function get_state($state_id)
     $result = $pdo->query($sql);
     return $result->fetch();
 }
+
+if (isset($_GET['sort_by']) && $_GET['sort_by'] != null) :
+    $result = get_inventory($sort_by = $_GET['sort_by']);
+else :
+    $result = get_inventory();
+endif;
 
 ?>
 
@@ -49,8 +59,20 @@ function get_state($state_id)
         </tr>
     <?php endwhile ?>
 </table>
+<br>
+<br>
+<form action="index.php" method="get">
+    Sort by:
+    <select name="sort_by">
 
+        <option value="Miles">Miles</option>
+        <option value="Year">Year</option>
+        <option value="State">State</option>
 
+    </select>
+
+    <button type="submit">Sort</button>
+</form>
 <?php
 include_once 'inc/footer.php'
 ?>
