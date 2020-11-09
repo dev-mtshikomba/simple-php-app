@@ -5,7 +5,7 @@ require_once 'inc/header.php';
 if (isset($_POST['create']) && $_POST['create'] != null) :
     $sql = "INSERT INTO `corvettes` (`Body_Style`, `Miles`, `Year`, `State`) VALUES ('{$_POST['Body_Style']}', '{$_POST['Miles']}', '{$_POST['Year']}', '1')";
     $result = $pdo->query($sql);
-    header("Location: index.php");
+    header("Location: carsdata.php");
 endif;
 ?>
 
@@ -39,7 +39,7 @@ endif;
     <button type="submit">CREATE RECORD</button>
     <br>
     <br>
-    <a href="index.php"><< HOME</a>
+    <a href="carsdata.php"><< HOME</a>
 </form>
 
 <?php

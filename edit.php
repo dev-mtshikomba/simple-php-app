@@ -14,7 +14,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') :
 // var_dump($data['Vette_id']);
 
 elseif (isset($_POST['update'])) :
-    // update the database and redirect to index.php 
+    // update the database and redirect to carsdata.php 
     $id = $_POST['update'];
     $sql = "update corvettes set `Body_Style`='{$_POST['Body_Style']}', `Miles`='{$_POST['Miles']}', `Year`='{$_POST['Year']}' where Vette_id={$id}";
     $result = $pdo->query($sql);
@@ -22,8 +22,8 @@ elseif (isset($_POST['update'])) :
     // var_dump($result);
     header("Location: edit.php?id={$id}");
 else :
-    // just redirect to index.php
-    header("Location: index.php");
+    // just redirect to carsdata.php
+    header("Location: carsdata.php");
 endif
 
 ?>
@@ -57,7 +57,7 @@ endif
     <br>
     <button type="submit">UPDATE RECORD</button>
 </form>
-<a href="index.php">
+<a href="carsdata.php">
     << HOME </a> <?php
                     require_once 'inc/footer.php';
                     ?>
